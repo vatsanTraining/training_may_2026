@@ -3,10 +3,13 @@
  */
 package com.example.demo;
 
+import java.io.File;
+
 import com.example.demo.exceptions.RangeCheckException;
 import com.example.demo.ifaces.Calculation;
 import com.example.demo.ifaces.CurrencyConverter;
 import com.example.demo.ifaces.TravelCalculation;
+import com.example.demo.io.TextFileService;
 import com.example.demo.model.LuxuryPackage;
 import com.example.demo.model.TravelPackage;
 
@@ -16,8 +19,16 @@ import com.example.demo.model.TravelPackage;
 public class Application {
 
 	/**
+	 * @param <T>
 	 * @param args
 	 */
+	
+	
+	public static <T> void print(Calculation<T> poly, T arg) {
+		
+		System.out.println(poly.calculate(arg));
+	}
+	
 	
 	
 	public static void main(String[] args) {
@@ -55,21 +66,31 @@ public class Application {
 
 			Calculation<TravelPackage> calc = new TravelCalculation();
 			
-			System.out.println("Australia Fare:=>"+calc.calculate(usaTour));
 			
+			print(calc,ausTour);
 			
 			Calculation<Double> currency = new CurrencyConverter();
 			
-			System.out.println(currency.calculate(60.00));
+              print(currency, 90.00);               
+               
 			
-			
+              
 			
 			System.out.println(usaFare);
+			
+			TextFileService service = new TextFileService();
+			
+			
+			boolean result=service.writeToFile(new File("travel.txt"), ausTour);
+			
+			System.out.println("is Added To File =>"+ result);
 		} catch (RangeCheckException e) {
 			e.printStackTrace();
 		}
 		
 		
 	}
+
+	
 
 }

@@ -57,7 +57,11 @@ public class TravelPackage  {
 	public void setFirstTimeTraveller(boolean isFirstTimeTraveller) {
 		this.isFirstTimeTraveller = isFirstTimeTraveller;
 	}
-	
+	@Override
+	public String toString() {
+		return destination +" ,"+basePrice+","+travelerCount;
+		
+	}
 	
 	
 }
