@@ -2,20 +2,21 @@ package com.example.demo.model;
 
 import com.example.demo.exceptions.RangeCheckException;
 
-public class TravelPackage {
+public class TravelPackage  {
 
 	private String destination ;
 	private double basePrice ;
 	private int travelerCount;
 	private boolean isFirstTimeTraveller;
 	
+    
 	public TravelPackage() {
 		super();
 	}
 	public TravelPackage(String destination, double basePrice, int travelerCount, boolean isFirstTimeTraveller) throws RangeCheckException {
 		super();
 		this.destination = destination;
-		if(basePrice<0 || basePrice >50000) {
+		if(basePrice<0 || basePrice >500000) {
 			throw new RangeCheckException("ERR-A101 Base Price should be in the range of 1-50000");
 		} else {
 		this.basePrice = basePrice;

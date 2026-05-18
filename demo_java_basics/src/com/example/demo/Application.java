@@ -4,6 +4,9 @@
 package com.example.demo;
 
 import com.example.demo.exceptions.RangeCheckException;
+import com.example.demo.ifaces.Calculation;
+import com.example.demo.ifaces.CurrencyConverter;
+import com.example.demo.ifaces.TravelCalculation;
 import com.example.demo.model.LuxuryPackage;
 import com.example.demo.model.TravelPackage;
 
@@ -15,6 +18,8 @@ public class Application {
 	/**
 	 * @param args
 	 */
+	
+	
 	public static void main(String[] args) {
 		
 		// TODO Auto-generated method stub
@@ -31,7 +36,7 @@ public class Application {
 
 		TravelPackage europeTour;
 		try {
-			europeTour = new TravelPackage("paris", 45000, 2, true);
+			europeTour = new TravelPackage("paris", 65000, 2, true);
 			
 			var fare = europeTour.getBasePrice() * europeTour.getTravelerCount();
 			
@@ -43,6 +48,21 @@ public class Application {
 			
 			var usaFare = (usaTour.getTravelerCount()*usaTour.getBasePrice())
 					 + usaTour.getGuideFees();
+			
+			
+			
+			var ausTour = new TravelPackage("australia", 55000, 2, true);
+
+			Calculation<TravelPackage> calc = new TravelCalculation();
+			
+			System.out.println("Australia Fare:=>"+calc.calculate(usaTour));
+			
+			
+			Calculation<Double> currency = new CurrencyConverter();
+			
+			System.out.println(currency.calculate(60.00));
+			
+			
 			
 			System.out.println(usaFare);
 		} catch (RangeCheckException e) {
