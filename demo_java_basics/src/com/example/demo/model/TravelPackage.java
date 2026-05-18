@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.exceptions.RangeCheckException;
+
 public class TravelPackage {
 
 	private String destination ;
@@ -10,10 +12,14 @@ public class TravelPackage {
 	public TravelPackage() {
 		super();
 	}
-	public TravelPackage(String destination, double basePrice, int travelerCount, boolean isFirstTimeTraveller) {
+	public TravelPackage(String destination, double basePrice, int travelerCount, boolean isFirstTimeTraveller) throws RangeCheckException {
 		super();
 		this.destination = destination;
+		if(basePrice<0 || basePrice >50000) {
+			throw new RangeCheckException("ERR-A101 Base Price should be in the range of 1-50000");
+		} else {
 		this.basePrice = basePrice;
+		}
 		this.travelerCount = travelerCount;
 		this.isFirstTimeTraveller = isFirstTimeTraveller;
 	}
@@ -27,7 +33,16 @@ public class TravelPackage {
 		return basePrice;
 	}
 	public void setBasePrice(double basePrice) {
-		this.basePrice = basePrice;
+		
+		try {
+			if(basePrice<0 && basePrice >50000) {
+				throw new RangeCheckException("ERR-A101 Base Price should be in the range of 1-50000");
+			} else {
+			this.basePrice = basePrice;
+			}
+		} catch (RangeCheckException e) {
+			e.printStackTrace();
+		}
 	}
 	public int getTravelerCount() {
 		return travelerCount;

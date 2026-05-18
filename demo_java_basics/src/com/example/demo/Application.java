@@ -3,6 +3,7 @@
  */
 package com.example.demo;
 
+import com.example.demo.exceptions.RangeCheckException;
 import com.example.demo.model.LuxuryPackage;
 import com.example.demo.model.TravelPackage;
 
@@ -28,20 +29,27 @@ public class Application {
 		
 		System.out.println(grtObj.getMessage());
 
-		TravelPackage europeTour = new TravelPackage("paris", 45000, 2, true);
+		TravelPackage europeTour;
+		try {
+			europeTour = new TravelPackage("paris", 45000, 2, true);
+			
+			var fare = europeTour.getBasePrice() * europeTour.getTravelerCount();
+			
+			System.out.println("Amount To Pay =>"+ fare);
+			
+			
+			LuxuryPackage usaTour  = new LuxuryPackage("Atlanta", 89000, 2, true, 20000);
+			
+			
+			var usaFare = (usaTour.getTravelerCount()*usaTour.getBasePrice())
+					 + usaTour.getGuideFees();
+			
+			System.out.println(usaFare);
+		} catch (RangeCheckException e) {
+			e.printStackTrace();
+		}
 		
-		var fare = europeTour.getBasePrice() * europeTour.getTravelerCount();
 		
-		System.out.println("Amount To Pay =>"+ fare);
-		
-		
-		LuxuryPackage usaTour  = new LuxuryPackage("Atlanta", 89000, 2, true, 20000);
-		
-		
-		var usaFare = (usaTour.getTravelerCount()*usaTour.getBasePrice())
-				 + usaTour.getGuideFees();
-		
-		System.out.println(usaFare);
 	}
 
 }
