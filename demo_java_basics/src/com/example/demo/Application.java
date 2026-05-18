@@ -4,6 +4,7 @@
 package com.example.demo;
 
 import java.io.File;
+import java.util.List;
 
 import com.example.demo.exceptions.RangeCheckException;
 import com.example.demo.ifaces.Calculation;
@@ -84,6 +85,14 @@ public class Application {
 			boolean result=service.writeToFile(new File("travel.txt"), ausTour);
 			
 			System.out.println("is Added To File =>"+ result);
+			
+			
+			List<TravelPackage> list = service.readFromFile(new File("travel.txt"));
+			
+			
+			for(TravelPackage eachPackage: list) {
+				System.out.println(eachPackage);
+			}
 		} catch (RangeCheckException e) {
 			e.printStackTrace();
 		}

@@ -1,2 +1,5 @@
 australia ,55000.0,2
+usa ,65000.0,3
+africa ,75000.0,4
+australia ,55000.0,2
 australia ,55000.0,2
