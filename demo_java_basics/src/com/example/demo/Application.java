@@ -82,7 +82,7 @@ public class Application {
 			TextFileService service = new TextFileService();
 			
 			
-			boolean result=service.writeToFile(new File("travel.txt"), ausTour);
+			boolean result=service.writeToFile(new File("travel.txt"), usaTour);
 			
 			System.out.println("is Added To File =>"+ result);
 			
