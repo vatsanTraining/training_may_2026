@@ -1,7 +1,16 @@
-package com.example.demo.model;
+package com.example.demo;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.exceptions.RangeCheckException;
 
+@Component
+//@Lazy
+//@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class TravelPackage  {
 
 	private String destination ;
@@ -12,6 +21,7 @@ public class TravelPackage  {
     
 	public TravelPackage() {
 		super();
+		System.out.println("=========== Constructor Called =========");
 	}
 	public TravelPackage(String destination, double basePrice, int travelerCount, boolean isFirstTimeTraveller) throws RangeCheckException {
 		super();
