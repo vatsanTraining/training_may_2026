@@ -3,6 +3,7 @@ package com.example.demo.repo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +14,8 @@ import lombok.Data;
 
 @Repository
 @Data
-@Profile(value = "prod")
-
+//@Profile(value = "prod")
+@ConditionalOnProperty(name = "my.choice",havingValue = "list")
 public class TravelPackageListRepoistory implements TravelRepo {
 
 	
