@@ -2,13 +2,15 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.training.TravelAgent;
 
 import com.example.demo.exceptions.RangeCheckException;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.example.demo","org.training"})
 public class QuickstartApplication {
 
 	public static void main(String[] args) {
@@ -36,20 +38,14 @@ public class QuickstartApplication {
 	 System.out.println(beanThree);
 	 
 	 
+	 TravelAgent agent = ctx.getBean(TravelAgent.class);
+	 
+	 System.out.println(agent);
 	  
+	 
 	
 	ctx.close();
 	}
 
-	@Bean
-	TravelPackage  beanTwo() throws RangeCheckException {
-		
-		return new TravelPackage("australia", 56000, 2, false);
-	}
 	
-@Bean	
-TravelPackage  beanThree() throws RangeCheckException {
-		
-		return new TravelPackage("srilanka", 76000, 3, true);
-	}
 }
