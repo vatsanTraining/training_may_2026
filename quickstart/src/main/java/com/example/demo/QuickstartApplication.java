@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.training.TravelAgent;
 
 import com.example.demo.exceptions.RangeCheckException;
+import com.example.demo.services.TravelService;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.example.demo","org.training"})
@@ -43,8 +45,18 @@ public class QuickstartApplication {
 	 System.out.println(agent);
 	  
 	 
+	 try {
+		ctx.getBean(TravelService.class).findAll().forEach(System.out::println);
+	} catch (BeansException e) {
+		e.printStackTrace();
+	} catch (RangeCheckException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 
+	 
 	
-	ctx.close();
+	//ctx.close();
 	}
 
 	
