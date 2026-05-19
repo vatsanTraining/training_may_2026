@@ -1,20 +1,19 @@
 package com.example.demo.repo;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.example.demo.TravelPackage;
 import com.example.demo.exceptions.RangeCheckException;
 
 @Repository
-@Primary
+//@Primary
+@Profile(value = "dev")
 public class TravelPackageSetRepository implements TravelRepo {
 
 	@Override

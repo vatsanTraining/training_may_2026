@@ -3,6 +3,7 @@ package com.example.demo.repo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.TravelPackage;
@@ -12,6 +13,8 @@ import lombok.Data;
 
 @Repository
 @Data
+@Profile(value = "prod")
+
 public class TravelPackageListRepoistory implements TravelRepo {
 
 	
