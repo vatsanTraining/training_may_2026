@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Lazy;
@@ -72,6 +74,23 @@ public class TravelPackage  {
 	public String toString() {
 		return destination +" ,"+basePrice+","+travelerCount;
 		
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(basePrice, destination, isFirstTimeTraveller, travelerCount);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TravelPackage other = (TravelPackage) obj;
+		return Double.doubleToLongBits(basePrice) == Double.doubleToLongBits(other.basePrice)
+				&& Objects.equals(destination, other.destination) && isFirstTimeTraveller == other.isFirstTimeTraveller
+				&& travelerCount == other.travelerCount;
 	}
 	
 	

@@ -12,10 +12,11 @@ import lombok.Data;
 
 @Repository
 @Data
-public class TravelPackageRepoistory {
+public class TravelPackageListRepoistory implements TravelRepo {
 
 	
 	
+	@Override
 	public List<TravelPackage> getPackages() throws RangeCheckException{
 		
 		List<TravelPackage> list = new ArrayList<>();
@@ -25,6 +26,9 @@ public class TravelPackageRepoistory {
 		list.add(new TravelPackage("lanka",56000.00,3,false));
 		
 		list.add(new TravelPackage("nepal",70000.00,5,true));
+		
+		list.add(new TravelPackage("paris",60000.00,2,false));
+
 		
 		return list;
 	}

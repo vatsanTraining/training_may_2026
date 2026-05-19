@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class TravelPackageController {
 	
 	
 	@GetMapping
-	ResponseEntity<List<TravelPackage>> findAll() throws RangeCheckException{
+	ResponseEntity<Collection<TravelPackage>> findAll() throws RangeCheckException{
 		
 		return ResponseEntity.ok(service.findAll());
 	}
