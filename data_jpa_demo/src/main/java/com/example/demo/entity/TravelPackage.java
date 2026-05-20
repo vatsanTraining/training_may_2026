@@ -33,13 +33,26 @@ public class TravelPackage  {
 		super();
 		System.out.println("=========== Constructor Called =========");
 	}
-	public TravelPackage(String destination, double basePrice, int travelerCount, boolean isFirstTimeTraveller) 
-			 {
+	
+	public TravelPackage(Long id, String destination, double basePrice, int travelerCount,
+			boolean isFirstTimeTraveller) {
 		super();
+		this.id = id;
 		this.destination = destination;
+		this.basePrice = basePrice;
 		this.travelerCount = travelerCount;
 		this.isFirstTimeTraveller = isFirstTimeTraveller;
 	}
+
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getDestination() {
 		return destination;
 	}
