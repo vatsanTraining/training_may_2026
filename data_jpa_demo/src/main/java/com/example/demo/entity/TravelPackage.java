@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 public class TravelPackage  {
 
 	@Id
-	
 	private Long id;
 	
 	
