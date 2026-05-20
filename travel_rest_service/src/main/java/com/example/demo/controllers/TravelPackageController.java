@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import com.example.demo.entity.*;
 import com.example.demo.services.TravelService;
+
+import jakarta.validation.Valid;
+
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 @RestController
 @RequestMapping(path = "/api/v1/tours")
@@ -36,11 +43,22 @@ public class TravelPackageController {
 	}
 	
 	@PostMapping
-	ResponseEntity<TravelPackage> save(@RequestBody TravelPackage entity){
+	ResponseEntity<TravelPackage> save(@Valid @RequestBody TravelPackage entity){
 		
-		return ResponseEntity
-				   .status(HttpStatusCode.valueOf(201))
-				     .body(service.save(entity));
+//		return ResponseEntity
+//				   .status(HttpStatusCode.valueOf(201))
+//				     .body(service.save(entity));
+		
+		 TravelPackage saved = service.save(entity);
+
+		 URI location = MvcUriComponentsBuilder
+				 .fromMethodCall(on(TravelPackageController.class)
+						 .findById(saved.getId())).build().toUri();
+						 
+						 
+		     return ResponseEntity.created(location).body(saved);
+		     
+		
 	}
 	
 	
