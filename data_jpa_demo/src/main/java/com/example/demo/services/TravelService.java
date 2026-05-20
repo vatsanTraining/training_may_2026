@@ -25,4 +25,14 @@ public class TravelService {
 		return this.repo.findAll();
 	}
 	
+	public TravelPackage  save(TravelPackage entity) {
+		
+		return this.repo.save(entity);
+	}
+	
+	public TravelPackage findById(Long id) {
+		
+		return this.repo.findById(id)
+				 .orElseThrow(()-> new RuntimeException("Element with Given Id Not Found"));
+	}
 }
