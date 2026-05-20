@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.hibernate.validator.constraints.Range;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,11 +22,9 @@ public class TravelPackage  {
 	
 	
 	@Column(name = "destination",length = 20)
-	@NotEmpty
 	private String destination ;
 	
 	@Column(name="base_price")
-	@Range(min = 25000, max = 250000,message = "base price should be 25000 to 250000")
 	private double basePrice ;
 	
 	@Column(name = "traveler_count")

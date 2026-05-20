@@ -6,14 +6,17 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import com.example.demo.dtos.TravelPackageDto;
 import com.example.demo.entity.*;
 import com.example.demo.services.TravelService;
 
@@ -31,29 +34,29 @@ public class TravelPackageController {
 	
 	
 	@GetMapping
-	ResponseEntity<Iterable<TravelPackage>> findAll() {
+	ResponseEntity<Iterable<TravelPackageDto>> findAll() {
 		
 		return ResponseEntity.ok(service.findAll());
 	}
 	
 	@GetMapping(path = "/{id}")
-	ResponseEntity<TravelPackage> findById(@PathVariable Long id) {
+	ResponseEntity<TravelPackageDto> findById(@PathVariable Long id) {
 		
 		return ResponseEntity.ok(service.findById(id));
 	}
 	
 	@PostMapping
-	ResponseEntity<TravelPackage> save(@Valid @RequestBody TravelPackage entity){
+	ResponseEntity<TravelPackageDto> save(@Valid @RequestBody TravelPackageDto entity){
 		
 //		return ResponseEntity
 //				   .status(HttpStatusCode.valueOf(201))
 //				     .body(service.save(entity));
 		
-		 TravelPackage saved = service.save(entity);
+		 TravelPackageDto saved = service.save(entity);
 
 		 URI location = MvcUriComponentsBuilder
 				 .fromMethodCall(on(TravelPackageController.class)
-						 .findById(saved.getId())).build().toUri();
+						 .findById(saved.id())).build().toUri();
 						 
 						 
 		     return ResponseEntity.created(location).body(saved);
@@ -61,5 +64,16 @@ public class TravelPackageController {
 		
 	}
 	
+	@PutMapping
+	
+	
+	
+	@DeleteMapping
+	ResponseEntity<Void> removeById(@PathVariable Long id){
+		
+		 service.removeByid(id);
+		 
+		return null;
+	}
 	
 }
