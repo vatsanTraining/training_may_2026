@@ -18,7 +18,6 @@ import ch.qos.logback.core.joran.spi.HttpUtil.RequestMethod;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
 	

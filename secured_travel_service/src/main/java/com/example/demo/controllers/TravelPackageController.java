@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -90,6 +91,7 @@ public class TravelPackageController {
 		}
 		 
 	
+	@PreAuthorize("hasRole('Admin')")	
 	@PatchMapping(path = "/{id}/{updatedPrice}")
 	public ResponseEntity<String> updatePrice(@PathVariable Long id,@PathVariable double updatedPrice){
 		
