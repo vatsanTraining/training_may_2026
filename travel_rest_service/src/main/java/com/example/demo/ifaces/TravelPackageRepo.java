@@ -20,6 +20,14 @@ public interface TravelPackageRepo extends JpaRepository<TravelPackage, Long> {
 	
 	// Query with Projection
 	
+	//select basePrice,destination,travelCount from TravelPackage where travelCount>1
+	
+	// select basePrice,destination,travelCount loosely to mapped to the record
+	
+	// findByTravelerCountGreaterThan loosely mapped to travelerCount>
+	
+	// srchValue is mapped to parameter of the method
+	
 	List<TravelPackgeResponseDto> findByTravelerCountGreaterThan(int srchValue);
 	
 	// DML Query with Modifying ,Transaction
