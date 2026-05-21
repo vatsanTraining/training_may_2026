@@ -22,6 +22,13 @@ public interface TravelPackageRepo extends JpaRepository<TravelPackage, Long> {
 	List<TravelPackage> fetchFirstTimeGuests();
 	
 	
+	// Custom Query with JPQL - table name replaced with class name column name replaced with class field Name
+
+		@Query(value = "from TravelPackage where isFirstTimeTraveller=true",nativeQuery = false)
+		
+		List<TravelPackage> fetchGuests();
+
+	
 	
 	// Query with Projection
 	
@@ -38,8 +45,8 @@ public interface TravelPackageRepo extends JpaRepository<TravelPackage, Long> {
 	// DML Query with Modifying ,Transaction
 	
 	
-	// Custom Query with JPQL
-
+	
+	
 }
 
 
