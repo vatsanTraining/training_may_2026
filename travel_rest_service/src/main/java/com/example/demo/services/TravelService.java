@@ -3,6 +3,7 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,6 +89,20 @@ public class TravelService {
 
   }
 
+  
+  public List<TravelPackageDto>  sortBy(String fieldName){
+	  
+	  Sort sortCondition = Sort.by(fieldName);
+	  
+	  return this.repo.findAll(sortCondition).stream().map(this::entityToDto).toList();
+  }
+  
+  // TODO Paging
+  
+  public int updateBasePrice(Long id, double updatedPrice) {
+	  
+	  return this.repo.updateBasePrice(updatedPrice, id);
+  }
   
 	private TravelPackageDto  entityToDto(TravelPackage entity) {
 		
