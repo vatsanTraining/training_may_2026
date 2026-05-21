@@ -4,8 +4,10 @@ package com.example.demo.services;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dtos.TravelPackageDto;
+import com.example.demo.dtos.TravelPackgeResponseDto;
 import com.example.demo.entity.TravelPackage;
 import com.example.demo.ifaces.TravelPackageRepo;
 
@@ -31,7 +33,7 @@ public class TravelService {
 	public TravelPackageDto  save(TravelPackageDto entity) {
 		
 		
-		TravelPackage saved= this.repo.save(DtoToEntity(entity));
+		TravelPackage saved= this.repo.save(dtoToEntity(entity));
 		
 		
 		return entityToDto(saved);
@@ -45,20 +47,38 @@ public class TravelService {
 		 return entityToDto(found);
 	}
 	
-	public TravelPackageDto removeByid(Long id) {
+	public void removeByid(Long id) {
 		
-		repo.deleteById(id);
+		if (!this.repo.existsById(id)) {
+	        throw new RuntimeException("Element Not  found with id: " + id);
+	    }
+	     this.repo.deleteById(id);
 		
-		//TODO
-		return null;
 	}
 	
-	public TravelPackageDto update(Long id, TravelPackageDto updated) {
+	@Transactional
+	public TravelPackageDto update(Long id, TravelPackageDto toUpdate) {
 		
-		//TODO
-		return null;
+		if (!repo.existsById(toUpdate.id())) {
+            throw new RuntimeException("Cannot update" + toUpdate.id() + " not found");
+        }
+		
+		TravelPackage updated= repo.save(dtoToEntity(toUpdate));
+		 
+		 return entityToDto(updated);
 	}
 	
+	public List<TravelPackageDto> findByDestination(String destination){
+		
+		return this.repo.findByDestination(destination)
+				.stream().map(this::entityToDto).toList();
+	}
+	
+  public List<TravelPackgeResponseDto> findByTravelCount(int value){
+		
+		return this.repo.findByTravelerCountGreaterThan(value);
+	}
+
 	private TravelPackageDto  entityToDto(TravelPackage entity) {
 		
 		
@@ -66,10 +86,13 @@ public class TravelService {
 				entity.getTravelerCount(), entity.isFirstTimeTraveller());
 	}
 	
-	private TravelPackage DtoToEntity(TravelPackageDto dto) {
+	
+	private TravelPackage dtoToEntity(TravelPackageDto dto) {
 		
 		return new TravelPackage(dto.id(),
 				dto.destination(), dto.basePrice(), dto.travelCount(),
 				dto.isFirstTimeTraveller());
 	}
+	
+	
 }

@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import com.example.demo.dtos.TravelPackageDto;
+import com.example.demo.dtos.TravelPackgeResponseDto;
 import com.example.demo.entity.*;
 import com.example.demo.services.TravelService;
 
@@ -45,6 +47,17 @@ public class TravelPackageController {
 		return ResponseEntity.ok(service.findById(id));
 	}
 	
+	@GetMapping(path = "/srch/destination/{srchString}")
+	ResponseEntity<List<TravelPackageDto>> findByDestination(@PathVariable String srchString) {
+		
+		return ResponseEntity.ok(service.findByDestination(srchString));
+	}
+	
+	@GetMapping(path = "/srch/count/{value}")
+	ResponseEntity<List<TravelPackgeResponseDto>> findByTravelerCounty(@PathVariable int  value) {
+		
+		return ResponseEntity.ok(service.findByTravelCount(value));
+	}
 	@PostMapping
 	ResponseEntity<TravelPackageDto> save(@Valid @RequestBody TravelPackageDto entity){
 		
@@ -73,7 +86,9 @@ public class TravelPackageController {
 		
 		 service.removeByid(id);
 		 
-		return null;
+         
+      return ResponseEntity.noContent().build();
+
 	}
 	
 }
