@@ -3,6 +3,7 @@ package com.example.demo.ifaces;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.dtos.TravelPackgeResponseDto;
@@ -16,7 +17,11 @@ public interface TravelPackageRepo extends JpaRepository<TravelPackage, Long> {
 	  
 	//Custom Query with native SQL
 	
-	// Custom Query with JPQL
+	@Query(value = "select * from travel_may_2026 where is_first_time_traveller=true",nativeQuery = true)
+	
+	List<TravelPackage> fetchFirstTimeGuests();
+	
+	
 	
 	// Query with Projection
 	
@@ -31,6 +36,10 @@ public interface TravelPackageRepo extends JpaRepository<TravelPackage, Long> {
 	List<TravelPackgeResponseDto> findByTravelerCountGreaterThan(int srchValue);
 	
 	// DML Query with Modifying ,Transaction
+	
+	
+	// Custom Query with JPQL
+
 }
 
 

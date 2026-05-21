@@ -58,6 +58,12 @@ public class TravelPackageController {
 		
 		return ResponseEntity.ok(service.findByTravelCount(value));
 	}
+	
+	@GetMapping(path = "/srch/first")
+	ResponseEntity<List<TravelPackageDto>> findFirstTimeTravel(){
+		return ResponseEntity.ok(service.fetchFirstTimeGuests());
+	}
+	
 	@PostMapping
 	ResponseEntity<TravelPackageDto> save(@Valid @RequestBody TravelPackageDto entity){
 		

@@ -79,6 +79,13 @@ public class TravelService {
 		return this.repo.findByTravelerCountGreaterThan(value);
 	}
 
+
+  public List<TravelPackageDto> fetchFirstTimeGuests(){
+		
+		return this.repo.fetchFirstTimeGuests().stream().map(this::entityToDto).toList();
+	}
+
+  
 	private TravelPackageDto  entityToDto(TravelPackage entity) {
 		
 		
