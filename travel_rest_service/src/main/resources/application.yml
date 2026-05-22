@@ -4,13 +4,13 @@ server:
 spring:
   application:
     name: travel-service
-  boot:
-    admin:
-      client:
-        url: http://localhost:8888 # Point to your working Admin Server
-        instance: 
-          pref-ip: true
-          service-base-url: http://localhost:8888  
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:8888 # Point to your working Admin Server
+#        instance: 
+#          pref-ip: true
+#          service-base-url: http://localhost:8888  
   datasource:
     url: jdbc:h2:~/testdb
     username: sa

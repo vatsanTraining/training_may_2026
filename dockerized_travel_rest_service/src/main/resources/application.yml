@@ -1,0 +1,19 @@
+
+spring:
+  application:
+    name: travel-service
+  datasource:
+    url: jdbc:h2:~/testdb
+    username: sa
+    password: ""
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" 
+           
