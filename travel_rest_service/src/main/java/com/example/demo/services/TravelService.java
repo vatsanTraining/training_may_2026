@@ -12,6 +12,10 @@ import com.example.demo.dtos.TravelPackgeResponseDto;
 import com.example.demo.entity.TravelPackage;
 import com.example.demo.ifaces.TravelPackageRepo;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 @Service
 public class TravelService {
@@ -98,6 +102,15 @@ public class TravelService {
   }
   
   // TODO Paging
+  
+  public Page<TravelPackageDto> findAllWithPaging(int pageNum, int pageSize) {
+
+	  Pageable pageable = PageRequest.of(pageNum, pageSize);
+      
+      Page<TravelPackage> entityPage = this.repo.findAll(pageable);
+      
+      return entityPage.map(this::entityToDto);
+  }
   
   public int updateBasePrice(Long id, double updatedPrice) {
 	  

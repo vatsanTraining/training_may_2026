@@ -1,16 +1,31 @@
+server:
+  port: 4040
+
 spring:
+  application:
+    name: travel-service
+  boot:
+    admin:
+      client:
+        url: http://localhost:8888 # Point to your working Admin Server
+        instance: 
+          pref-ip: true
+          service-base-url: http://localhost:8888  
   datasource:
     url: jdbc:h2:~/testdb
     username: sa
-    password: ''
+    password: ""
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
 
-      
-      
-    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # Expose all endpoints to the admin dashboard
+  endpoint:
+    health:
+      show-details: always
 
-    
-      
